@@ -12,8 +12,13 @@ router.get("/:id", (req, res) => {
   projects
     .get(id)
     .then(response => {
-      res.status(200).json(response);
-      console.log(response);
+      if (!response) {
+        errorMessage(404, wrongId, res);
+      } else {
+        res.status(200).json(response);
+      }
+
+      // console.log(response);
     })
     .catch(err => {
       console.log(err);
