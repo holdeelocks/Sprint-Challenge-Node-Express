@@ -26,13 +26,23 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+We learned about Routers (which are like mini applications) and how they handle different subsets of routes. We also learned about CORS and Helmet which are two specific pieces of middleware. CORS helps you run a server/front-end simultaneously on the same machine and Helmet helps to add certain layers of security to an application.
+
 - [ ] Describe Middleware?
+
+Middleware is a function that is called between the request and the final response. Express is essentially a series of middleware function calls if you think about it. Middleware has access to the request and response objects and to the next() function which essentially tells express to move on to the next piece of middleware. Middleware can execute code, validate and/or authenticate the req/res objects, end a request/response and call the next middleware in the stack.
 
 - [ ] Describe a Resource?
 
+In a rest APi everything is a resource, they can be accessed through a unique url, resources can have multiple representations, and management of resoruces is done over HTTP through different methods (get, put, post and delete (CRUD))
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+An API can return status codes (201, 200, etc..) and it can also return either an object containing information about a resource or it can send back either a 1 or a 0 (typcially when deleting a resource), etc etc.
+
 - [ ] How can we partition our application into sub-applications?
+
+We can divide our application into separate Routers that deal with specific subsets of endpoints (users, posts, etc). We can also separate our server out from our index.js file so that we can apply/setup our server in it's own file and just run it in the index.js for simplicity. We can also apply middleware configs in a separate folder.
 
 ## Project Setup
 
@@ -44,12 +54,12 @@ Follow these steps to set up and work on your project:
 - [ ] Create a new Branch on the clone: git checkout -b `<firstName-lastName>`.
 - [ ] Implement the project on this Branch, committing changes regularly.
 - [ ] Push commits: git push origin `<firstName-lastName>`.
- 
+
 Follow these steps for completing your project.
 
-- [ ] Submit a Pull-Request to merge <firstName-lastName> Branch into master (student's  Repo). **Please don't merge your own pull request.**
+- [ ] Submit a Pull-Request to merge <firstName-lastName> Branch into master (student's Repo). **Please don't merge your own pull request.**
 - [ ] Add your Project Manager as a Reviewer on the Pull-request
-- [ ] PM then will count the HW as done by  merging the branch back into master.
+- [ ] PM then will count the HW as done by merging the branch back into master.
 
 ## Database Persistence Helpers
 
