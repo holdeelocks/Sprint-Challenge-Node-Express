@@ -1,13 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const ProjectList = ({ projects }) => {
   return (
     <div className="list">
+      <nav>
+        <NavLink to="/" className="navlink">
+          Home
+        </NavLink>
+      </nav>
       {projects &&
         projects.map((project, i) => (
           <div key={i}>
-            <Link to="/">{project.name}</Link>
+            <Link to={`/projects/${project.id}`}>{project.name}</Link>
             {project.description}
           </div>
         ))}
