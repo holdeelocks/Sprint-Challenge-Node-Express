@@ -16,7 +16,27 @@ class Project extends React.Component {
   render() {
     const { project } = this.state;
     console.log(project);
-    return <div>{project && <h3>{project.name}</h3>}</div>;
+    return (
+      <div>
+        {project && (
+          <>
+            <h3>Project: {project.name}</h3>
+            <p>Description: {project.description}</p>
+            <div>
+              <h4>Action(s):</h4>
+              {project.actions.map((action, i) => (
+                <ul key={i}>
+                  <h5>{`Action ${i}`}</h5>
+                  <li>{action.description}</li>
+                  <li>{action.notes}</li>
+                  <li>{action.completed}</li>
+                </ul>
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+    );
   }
 }
 

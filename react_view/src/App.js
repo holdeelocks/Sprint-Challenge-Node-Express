@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Route } from "react-router-dom";
+import { Route, NavLink } from "react-router-dom";
 
 import ProjectList from "./components/ProjectList";
 import Project from "./components/Project";
@@ -17,10 +17,16 @@ class App extends Component {
   }
   render() {
     const { projects } = this.state;
-    console.log(this.state);
+
     return (
       <div className="App">
         <h1>Node and Express Challenge</h1>
+        <nav>
+          <NavLink to="/" className="navlink">
+            Home
+          </NavLink>
+        </nav>
+
         <Route exact path="/" render={props => <ProjectList {...props} projects={projects} />} />
         <Route exact path="/projects/:id" render={props => <Project {...props} />} />
       </div>

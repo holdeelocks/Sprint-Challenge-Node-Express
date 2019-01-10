@@ -30,3 +30,29 @@
     transform: rotate(360deg);
   }
 }
+
+div {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin-top: 1.5%;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+  margin: 0 auto;
+}
+.projectlist p {
+  margin: 1.5% auto;
+}
+
+h3,
+h4,
+h5 {
+  margin-top: 0%;
+}
