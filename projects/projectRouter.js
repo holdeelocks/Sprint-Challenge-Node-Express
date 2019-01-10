@@ -7,14 +7,18 @@ const router = express.Router();
 
 const missing = { errorMessage: "You must include both a name and description" };
 
-router.get("/:id", async (req, res) => {
-  const { id } = req.params;
-  try {
-    const project = await projects.get(id);
-    return project ? res.status(200).json(project) : errorMessage(404, wrongId, res);
-  } catch (err) {
-    errorMessage(500, serverError, res);
-  }
+router.get("/:id", (req, res) => {
+  const id = req.params.id;
+  projects
+    .get(id)
+    .then(response => {
+      res.status(200).json(response);
+      console.log(response);
+    })
+    .catch(err => {
+      console.log(err);
+      errorMessage(404, wrongId, res);
+    });
 });
 
 router.get("/", async (req, res) => {
@@ -41,19 +45,26 @@ router.put("/:id", async (req, res) => {
   const { id } = req.params;
   const update = req.body;
   try {
-    const project = await projects.get(id);
-    console.log(project);
-    if (!project) {
-      console.log("here");
-      errorMessage(404, wrongId, res);
-      // return success ? res.status(202).json(update) :
+    const success = await projects.update(id, update);
+    // i did this way because I don't have to validate if the resource exists before I try to update it bc the update function
+    // will either send me null (fail) which means the project doesn't exist or it will be successful
+    return success === null ? errorMessage(404, wrongId, res) : res.status(202).json(success);
+  } catch (err) {
+    errorMessage(500, serverError, res);
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const success = await projects.remove(id);
+    if (success) {
+      const project = await projects.get(id);
+      res.status(202).json(project);
     } else {
-      console.log("no here");
-      const success = await projects.update(id, update);
-      res.status(202).json(success);
+      errorMessage(404, wrongId, res);
     }
   } catch (err) {
-    console.log(err);
     errorMessage(500, serverError, res);
   }
 });
